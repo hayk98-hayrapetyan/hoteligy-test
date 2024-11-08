@@ -21,8 +21,11 @@ const defaultCustomer: Customer = {
 const isLoading = ref(false)
 const isValid = ref(false)
 const form = ref<Customer>({ ...(customer ?? defaultCustomer) })
+const initialForm = JSON.stringify(form.value)
 
 const getFormTitle = computed(() => (!!customer ? 'Create customer' : 'Edit customer'))
+
+const isDisabled = computed(() => !isValid.value || initialForm === JSON.stringify(form.value))
 
 const isValidBirthday = (value: string) => {
   if (!value) return 'Birthday is required'
@@ -44,6 +47,8 @@ const isValidBirthday = (value: string) => {
 const handleClose = () => emit('close')
 
 const handleSave = () => {
+  if(isDisabled.value) return;
+
   isLoading.value = true
 
   form.value.birthday = new Date(form.value.birthday as string).toISOString().split('T')[0]
@@ -63,7 +68,7 @@ const handleSave = () => {
         <v-row>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="form.firstName"
+              v-model.trim="form.firstName"
               :rules="[() => !!form.firstName || 'First name is required']"
               label="First name"
               variant="solo"
@@ -71,7 +76,7 @@ const handleSave = () => {
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="form.lastName"
+              v-model.trim="form.lastName"
               :rules="[() => !!form.lastName || 'Last name is required']"
               label="Last name"
               variant="solo"
@@ -79,7 +84,7 @@ const handleSave = () => {
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="form.city"
+              v-model.trim="form.city"
               :rules="[() => !!form.city || 'City is required']"
               label="City"
               variant="solo"
@@ -107,7 +112,7 @@ const handleSave = () => {
           color="primary"
           variant="elevated"
           type="submit"
-          :disabled="!isValid"
+          :disabled="isDisabled"
           :loading="isLoading"
         >
           Save
