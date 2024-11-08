@@ -20,7 +20,7 @@ const defaultCustomer: Customer = {
 
 const isLoading = ref(false)
 const isValid = ref(false)
-const form = ref<Customer>({ ...(customer ?? defaultCustomer) })
+const form = ref<Customer>({ ...(customer ? { ...customer, birthday: new Date(customer.birthday!) } : defaultCustomer) })
 const initialForm = JSON.stringify(form.value)
 
 const getFormTitle = computed(() => (!!customer ? 'Create customer' : 'Edit customer'))
