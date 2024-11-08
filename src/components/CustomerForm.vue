@@ -99,6 +99,7 @@ const handleSave = () => {
               variant="solo"
               :mask="'##/##/####'"
               placeholder="MM/DD/YYYY"
+              @keypress.enter.prevent
             />
           </v-col>
         </v-row>
