@@ -93,12 +93,12 @@ fetchCustomers()
     <v-progress-circular indeterminate color="primary" :size="100" />
   </div>
   <div v-else>
-    <v-toolbar color="primary" class="px-8">
-      <v-toolbar-title class="ml-0">Customers page</v-toolbar-title>
+    <v-toolbar color="primary" class="px-4 sm:px-8">
+      <v-toolbar-title class="ml-0">Customers</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-dialog :model-value="showForm" @update:model-value="toggleEditForm()" max-width="700px">
         <template v-slot:activator="{ props }">
-          <v-btn variant="outlined" v-bind="props"> Create customer </v-btn>
+          <v-btn variant="outlined" v-bind="props"> Create <span class="d-none d-sm-inline">customer</span></v-btn>
         </template>
         <CustomerForm
           v-if="showForm"

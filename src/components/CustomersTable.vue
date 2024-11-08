@@ -46,23 +46,25 @@ const handleEdit = (customer: Customer) => {
 </script>
 
 <template>
-  <v-data-table :headers="headers" :items="customers" class="px-8">
+  <v-data-table :headers="headers" :items="customers" class="px-4 sm:px-8">
     <template v-slot:item.actions="{ item }">
-      <v-btn
+      <div class="d-flex flex-nowrap justify-end">
+        <v-btn
         density="compact"
         class="me-2"
         variant="text"
         icon=" mdi-pencil"
         color="primary"
         @click="handleEdit(item)"
-      ></v-btn>
+      />
       <v-btn
         density="compact"
         variant="text"
         icon=" mdi-delete"
         color="red"
         @click="toggleConfirmModal(item.id)"
-      ></v-btn>
+      />
+      </div>
     </template>
   </v-data-table>
 
@@ -72,9 +74,8 @@ const handleEdit = (customer: Customer) => {
       <v-card-actions class="mt-4">
         <v-btn variant="text" @click="toggleConfirmModal()">Cancel</v-btn>
         <v-btn
-          variant="flat"
-          color="deep-purple"
-          elevation="2"
+          color="primary"
+          variant="elevated"
           @click="handleDelete"
           :loading="isLoading"
         >
@@ -84,3 +85,10 @@ const handleEdit = (customer: Customer) => {
     </v-card>
   </v-dialog>
 </template>
+
+<style>
+.v-data-table-header__content {
+  white-space: nowrap;
+  font-weight: bold !important;
+}
+</style>
