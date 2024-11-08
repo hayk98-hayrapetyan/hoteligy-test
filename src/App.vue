@@ -3,7 +3,7 @@ import CustomersTable from '@/components/CustomersTable.vue'
 import CustomerForm from '@/components/CustomerForm.vue'
 import { getCustomers, createCustomer, deleteCustomer, updateCustomer } from '@/services'
 import { defaultServerErrorMessage } from '@/constants'
-import { Customer } from '@/types'
+import type { Customer } from '@/types'
 import { ref, reactive } from 'vue'
 
 const isLoading = ref(false)
@@ -36,7 +36,7 @@ const handleSave = async (customer: Customer, done: () => void) => {
       await updateCustomer(customer)
 
       const currentCustomerIndex = customers.value.findIndex(
-        (c) => c.id === selectedCustomer.value.id,
+        (c) => c.id === selectedCustomer.value!.id,
       )
 
       customers.value[currentCustomerIndex] = customer

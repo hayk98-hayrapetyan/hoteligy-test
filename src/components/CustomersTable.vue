@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Customer } from '@/types'
+import type { Customer } from '@/types'
+import { VDataTable } from 'vuetify/components'
 
 const { customers } = defineProps<{
   customers: Customer[]
@@ -14,15 +15,15 @@ const emit = defineEmits<{
 const isLoading = ref(false)
 const confirmDelete = ref(false)
 const selectedCustomerId = ref<number>()
-const headers = ref([
+const headers = ref<VDataTable['$props']['headers']>([
   {
     title: 'First name',
     align: 'start',
     key: 'firstName',
   },
-  { title: 'Last name', key: 'lastName' },
-  { title: 'City', key: 'city' },
-  { title: 'Birthday', key: 'birthday' },
+  { title: 'Last name', align: 'start',key: 'lastName' },
+  { title: 'City', align: 'start',key: 'city' },
+  { title: 'Birthday', align: 'start',key: 'birthday' },
   { title: 'Actions', key: 'actions', sortable: false, align: 'end' },
 ])
 
@@ -34,8 +35,10 @@ const toggleConfirmModal = (id?: number) => {
 
 const handleDelete = () => {
   isLoading.value = true
-  emit('delete', selectedCustomerId.value, () => {
+
+  emit('delete', selectedCustomerId.value!, () => {
     isLoading.value = false
+
     toggleConfirmModal()
   })
 }

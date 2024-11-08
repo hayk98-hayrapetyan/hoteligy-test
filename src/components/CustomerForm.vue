@@ -46,7 +46,7 @@ const handleClose = () => emit('close')
 const handleSave = () => {
   isLoading.value = true
 
-  form.value.birthday = new Date(form.value.birthday).toISOString().split('T')[0]
+  form.value.birthday = new Date(form.value.birthday as string).toISOString().split('T')[0]
 
   emit('save', form.value, () => {
     isLoading.value = false
