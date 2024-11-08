@@ -1,3 +1,7 @@
+# LIVE
+
+[Click here](https://average-boats.surge.sh/) to see the live version
+
 # hoteligy-test
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -19,6 +23,8 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 ```sh
 npm install
 ```
+
+### Create .env file from .env.example
 
 ### Compile and Hot-Reload for Development
 
