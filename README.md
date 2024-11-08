@@ -1,6 +1,6 @@
-# LIVE
+# LIVE DEMO
 
-[Click here](https://average-boats.surge.sh/) to see the live version
+[Click here](https://hoteligy-test.surge.sh/) to see the live version
 
 # hoteligy-test
 
