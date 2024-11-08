@@ -57,8 +57,8 @@ const handleSave = () => {
 </script>
 
 <template>
-  <v-card :title="getFormTitle">
-    <v-form v-model="isValid">
+  <v-form v-model="isValid" @submit.prevent="handleSave">
+    <v-card :title="getFormTitle">
       <v-container>
         <v-row>
           <v-col cols="12" sm="6">
@@ -98,21 +98,21 @@ const handleSave = () => {
           </v-col>
         </v-row>
       </v-container>
-    </v-form>
 
-    <v-divider></v-divider>
+      <v-divider></v-divider>
 
-    <v-card-actions>
-      <v-btn variant="plain" @click="handleClose"> Cancel </v-btn>
-      <v-btn
-        color="primary"
-        variant="elevated"
-        @click="handleSave"
-        :disabled="!isValid"
-        :loading="isLoading"
-      >
-        Save
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+      <v-card-actions>
+        <v-btn variant="plain" @click="handleClose"> Cancel </v-btn>
+        <v-btn
+          color="primary"
+          variant="elevated"
+          type="submit"
+          :disabled="!isValid"
+          :loading="isLoading"
+        >
+          Save
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-form>
 </template>
