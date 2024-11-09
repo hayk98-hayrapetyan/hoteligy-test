@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Customer } from '@/types'
+import { vMask } from "@opentf/vue-input-mask";
 
 const { customer } = defineProps<{
   customer?: Customer
@@ -25,10 +26,10 @@ const initialForm = JSON.stringify(form.value)
 
 const getFormTitle = computed(() => (!!customer ? 'Create customer' : 'Edit customer'))
 
-const isDisabled = computed(() => !isValid.value || initialForm === JSON.stringify(form.value))
+const isDisabled = computed(() => !isValid.value || !form.value.birthday || initialForm === JSON.stringify(form.value))
 
 const isValidBirthday = (value: string) => {
-  if (!value) return 'Birthday is required'
+  if(value === '__/__/____') return true;
 
   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/
 
@@ -41,6 +42,8 @@ const isValidBirthday = (value: string) => {
     return 'Birthday must be a valid date'
   }
 
+  form.value.birthday = new Date(value);
+
   return true
 }
 
@@ -51,9 +54,9 @@ const handleSave = () => {
 
   isLoading.value = true
 
-  form.value.birthday = new Date(form.value.birthday as string).toISOString().split('T')[0]
+  const birthday = new Date(form.value.birthday as string).toISOString().split('T')[0]
 
-  emit('save', form.value, () => {
+  emit('save', { ...form.value, birthday }, () => {
     isLoading.value = false
 
     handleClose()
@@ -97,7 +100,7 @@ const handleSave = () => {
               prepend-icon=""
               label="Birthday"
               variant="solo"
-              :mask="'##/##/####'"
+              v-mask="{ mask: '##/##/####' }"
               placeholder="MM/DD/YYYY"
               @keypress.enter.prevent
             />
