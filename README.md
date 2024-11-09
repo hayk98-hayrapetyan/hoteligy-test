@@ -1,6 +1,6 @@
 # LIVE DEMO
 
-[Click here](https://hoteligy-test.surge.sh/) to see the live version
+[Click here](https://master.djfjhrd3mckhx.amplifyapp.com/) to see the live version
 
 # hoteligy-test
 
